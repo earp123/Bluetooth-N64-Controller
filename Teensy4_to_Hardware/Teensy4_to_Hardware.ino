@@ -9,9 +9,6 @@
 *
 */
 
-
-#define data_pin (1 << 3)
-
 /*TODO 
 * >implement controller signal on poll
 * >write controller ID response for N64 startup
@@ -34,10 +31,11 @@ const uint32_t comp_1 = 112; //1us
 //init buffer
 uint32_t comp_vals[33];
 
-
-
 //response bit
 int res_bit = 0;
+
+//PIN 13 Mask, used below in config_pin()
+#define data_pin (1 << 3)
 
 void config_pin(){
    // Configure GPIO B0_03 (PIN 13) for output
