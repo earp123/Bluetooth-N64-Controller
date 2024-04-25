@@ -1,3 +1,11 @@
+/*  
+*   ~SWR~
+*   N64 Retro-fit Contoller Project
+*
+*   Upon every packet received by the peripheral over BLE UART, the RX callback writes 
+*   4 bytes of controller input to hardware Serial1, wired to the Serial1 pins of a Teensy 4.1.
+*/
+
 /*********************************************************************
  This is an example for our nRF52 based Bluefruit LE modules
 
