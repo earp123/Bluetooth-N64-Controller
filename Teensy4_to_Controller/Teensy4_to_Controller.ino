@@ -1,10 +1,11 @@
-/*  Nintendo 64 Controller Input capture on Teensy 4/4.1
-*
-*   by Sam Rall
+/*  
+*   ~SWR~
+*   N64 Retro-fit Contoller Project
 *
 *   Sends poll signal to controller and receives the controller response (buttons pressed)
 *   on the same pin poll_pin. Converts the response by comparing the intervals between pulses.
 *   Writes the controller response as a byte array of 4 bytes to Serial1.
+*   Hardware Serial1 pins (0 & 1) on the Teensy 4.0 are wired to Bluetooth chip hardware Serial pins.
 */
 
 
