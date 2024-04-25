@@ -4,6 +4,9 @@
 *
 *   Upon every packet received by the peripheral over BLE UART, the RX callback writes 
 *   4 bytes of controller input to hardware Serial1, wired to the Serial1 pins of a Teensy 4.1.
+*
+*   Keyboard input can be captured over USB Serial(0) and sent to the peripheral,
+*   although this project doesn't utilizze that.
 */
 
 /*********************************************************************
