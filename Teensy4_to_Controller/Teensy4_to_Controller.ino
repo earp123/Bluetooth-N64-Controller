@@ -5,7 +5,8 @@
 *   Sends poll signal to controller and receives the controller response (buttons pressed)
 *   on the same pin poll_pin. Converts the response by comparing the intervals between pulses.
 *   Writes the controller response as a byte array of 4 bytes to Serial1.
-*   Hardware Serial1 pins (0 & 1) on the Teensy 4.0 are wired to Bluetooth chip hardware Serial pins.
+*   Hardware Serial1 pins (0 & 1) on the Teensy 4.0 are wired to a 
+*   Bluetooth chip in the PERIPHERAL role via hardware Serial1 pins.
 */
 
 
