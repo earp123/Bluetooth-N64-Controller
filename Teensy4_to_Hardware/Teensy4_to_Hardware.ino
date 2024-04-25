@@ -1,3 +1,15 @@
+/*  
+*   ~SWR~
+*   N64 Retro-fit Contoller Project
+*
+*   Essentially a Joybus driver. 
+*   Contsantly writes the controller input on Serial1 to a buffer, 
+*   Manchester enocdes the buffer in pulse invertals as defined by Joybus,
+*   writes the pulses to the data pin upon receiving a poll for the Nintendo 64 (on the same pin).
+*
+*/
+
+
 #define data_pin (1 << 3)
 
 /*TODO 
@@ -150,12 +162,6 @@ void loop() {
           
         } 
 
-        
-
-        
-
-
-      
       poll = 0;
       //enable_poll_counter();//enable for new poll
       
