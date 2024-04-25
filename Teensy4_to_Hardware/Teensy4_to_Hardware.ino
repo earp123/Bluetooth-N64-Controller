@@ -3,9 +3,9 @@
 *   N64 Retro-fit Contoller Project
 *
 *   Essentially a Joybus driver. 
-*   Contsantly writes the controller input from Serial1 to a buffer, 
-*   Manchester enocdes the buffer in pulse invertals as defined by Joybus,
-*   writes the pulses to the data pin upon receiving a poll for the Nintendo 64 (on the same pin).
+*   Contsantly reads 4 bytes of controller input from Serial1 into a buffer, 
+*   Manchester enocdes the buffer to pulse invertals as defined by Joybus,
+*   writes the pulses to the data pin TODO> upon receiving a poll rom the Nintendo 64 (on the same pin).
 *
 *   This sketch is uploaded to a Teensy 4.1 that is wired to a Bluetooth board in the CENTRAL role
 *   via hardware Serial1.
