@@ -4,7 +4,7 @@
 *
 *   Sends poll signal to controller and receives the controller response (buttons pressed)
 *   on the same pin poll_pin. Converts the response by comparing the intervals between pulses.
-*   Outputs the controller response as a byte array of 4 bytes.
+*   Writes the controller response as a byte array of 4 bytes to Serial1.
 */
 
 
