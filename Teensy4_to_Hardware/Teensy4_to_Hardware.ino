@@ -13,9 +13,7 @@
 */
 
 /*TODO 
-* >implement controller signal on poll
-* >write controller ID response for N64 startup
-* >clean up
+* >write function that measures the joybus command such that we can respond with info or status
 *
 */
 
@@ -23,6 +21,7 @@ uint32_t controller_response = 0x0;
 uint8_t controller_response_buf[4] = {0};
 
 uint16_t device_info = 0x0500;
+uint8_t joybus_command = 0;
 
 
 volatile int stop_flag = 0;
@@ -93,7 +92,7 @@ void poll_counter_init(){
   TMR4_CMPLD12 = 8;
   
   TMR4_CTRL2 = TMR_CTRL_CM(0) | TMR_CTRL_PCS(2) | TMR_CTRL_LENGTH ; //configure the poll pin
-      //leave off at start ^  | source poll pin  | TODO poll pin needs to be the same as data pin
+      //leave off at start ^  | source poll pin  
   attachInterruptVector(IRQ_QTIMER4, my_isr);
   NVIC_ENABLE_IRQ(IRQ_QTIMER4);
   
@@ -126,7 +125,9 @@ void setup() {
     
     poll_counter_init();
     config_timers();
-    enable_poll_counter();
+
+
+    //enable_poll_counter();
     
     
 }
@@ -135,6 +136,14 @@ void setup() {
 
 void loop() {
 
+  for(int i = 0; i <= 7; i++){
+    duration[i] = hf_pulseIn(poll_pin, 1000);
+    
+    if(duration[i] > 100)    joybus_command &= ~(1<<(7-i)); //greater than 2us? = 0
+    else if(duration[i] > 3) joybus_command |= (1<<(7-i));  //else = 1, greater than 3 means we didn't timeout
+  }
+
+/*
   if (poll){
     
       disable_poll_counter();
@@ -150,26 +159,28 @@ void loop() {
       poll = 0;
       enable_poll_counter();//enable for new poll
       
-      }
+  }
+*/
 
-      if(Serial1.available()){
+    if(Serial1.available()){
 
-        
-        Serial1.readBytes((uint8_t *) controller_response_buf, 4);
-        controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
-                                ((uint32_t) controller_response_buf[1] << 16) |
-                                ((uint32_t) controller_response_buf[2] << 8) |
-                                ((uint32_t) controller_response_buf[3] ));
-        // Serial.print(controller_response_buf[0], BIN); 
-        // Serial.print(controller_response_buf[1], BIN);
-        // Serial.print(controller_response_buf[2], BIN);
-        // Serial.print(controller_response_buf[3], BIN);
-        // Serial.println();
-        
-        //Serial.println(controller_response, BIN);
-        encode_byte_to_out_comp(controller_response, comp_vals);
-        
-      } 
+      
+      Serial1.readBytes((uint8_t *) controller_response_buf, 4);
+      controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
+                              ((uint32_t) controller_response_buf[1] << 16) |
+                              ((uint32_t) controller_response_buf[2] << 8) |
+                              ((uint32_t) controller_response_buf[3] ));
+                              //TODO might need to reverse the bits here
+      // Serial.print(controller_response_buf[0], BIN); 
+      // Serial.print(controller_response_buf[1], BIN);
+      // Serial.print(controller_response_buf[2], BIN);
+      // Serial.print(controller_response_buf[3], BIN);
+      // Serial.println();
+      
+      //Serial.println(controller_response, BIN);
+      encode_byte_to_out_comp(controller_response, comp_vals);
+      
+    } 
 }
 
 void encode_byte_to_out_comp(uint32_t cntrllr_bytes, uint32_t out_B[])
