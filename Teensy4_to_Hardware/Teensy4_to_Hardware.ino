@@ -91,7 +91,7 @@ void poll_counter_init(){
   TMR4_CMPLD12 = 8;
   
   TMR4_CTRL2 = TMR_CTRL_CM(0) | TMR_CTRL_PCS(2) | TMR_CTRL_LENGTH ; //configure the poll pin
-      //leave off at start ^  | sour ce poll pin  | TODO poll pin needs to be the same as data pin
+      //leave off at start ^  | source poll pin  | TODO poll pin needs to be the same as data pin
   attachInterruptVector(IRQ_QTIMER4, my_isr);
   NVIC_ENABLE_IRQ(IRQ_QTIMER4);
   
@@ -124,7 +124,7 @@ void setup() {
     
     poll_counter_init();
     config_timers();
-    //enable_poll_counter();
+    enable_poll_counter();
     
     
 }
@@ -133,42 +133,41 @@ void setup() {
 
 void loop() {
 
- // if (poll){
+  if (poll){
     
-      //disable_poll_counter();
+      disable_poll_counter();
     
       //Clear the data pin
-      //GPIO7_DR_SET = data_pin;
-      encode_byte_to_out_comp(controller_response, comp_vals);
+      GPIO7_DR_SET = data_pin;
+      
       GPT1_CR |= GPT_CR_EN;
        //GPT2_CR |= GPT_CR_EN;
-      //delayMicroseconds(200);//wait for the signal to go
-      delay(5);
-
-        if(Serial1.available()){
-
-          
-          Serial1.readBytes((uint8_t *) controller_response_buf, 4);
-          controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
-                                 ((uint32_t) controller_response_buf[1] << 16) |
-                                 ((uint32_t) controller_response_buf[2] << 8) |
-                                 ((uint32_t) controller_response_buf[3] ));
-          // Serial.print(controller_response_buf[0], BIN); 
-          // Serial.print(controller_response_buf[1], BIN);
-          // Serial.print(controller_response_buf[2], BIN);
-          // Serial.print(controller_response_buf[3], BIN);
-          // Serial.println();
-          
-          //Serial.println(controller_response, BIN);
-          
-        } 
+      delayMicroseconds(200);//wait for the signal to go
+      //delay(5);
 
       poll = 0;
-      //enable_poll_counter();//enable for new poll
+      enable_poll_counter();//enable for new poll
       
-   //}
-   
+      }
 
+      if(Serial1.available()){
+
+        
+        Serial1.readBytes((uint8_t *) controller_response_buf, 4);
+        controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
+                                ((uint32_t) controller_response_buf[1] << 16) |
+                                ((uint32_t) controller_response_buf[2] << 8) |
+                                ((uint32_t) controller_response_buf[3] ));
+        // Serial.print(controller_response_buf[0], BIN); 
+        // Serial.print(controller_response_buf[1], BIN);
+        // Serial.print(controller_response_buf[2], BIN);
+        // Serial.print(controller_response_buf[3], BIN);
+        // Serial.println();
+        
+        //Serial.println(controller_response, BIN);
+        encode_byte_to_out_comp(controller_response, comp_vals);
+        
+      } 
 }
 
 void encode_byte_to_out_comp(uint32_t cntrllr_bytes, uint32_t out_B[])
