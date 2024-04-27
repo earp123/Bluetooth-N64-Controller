@@ -184,6 +184,8 @@ void loop() {
     else if(duration[i] > 3) joybus_command |= (1<<(7-i));  //else = 1, greater than 3 means we didn't timeout
   }
 
+  Serial.println(joybus_command, BIN);
+
 /*
   if (poll){
     
@@ -208,10 +210,11 @@ void loop() {
       
       Serial1.readBytes((uint8_t *) controller_response_buf, 4);
       controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
-                              ((uint32_t) controller_response_buf[1] << 16) |
-                              ((uint32_t) controller_response_buf[2] << 8) |
-                              ((uint32_t) controller_response_buf[3] ));
+                             ((uint32_t) controller_response_buf[1] << 16) |
+                             ((uint32_t) controller_response_buf[2] << 8)  |
+                             ((uint32_t) controller_response_buf[3] ));
                               //TODO might need to reverse the bits here
+
       // Serial.print(controller_response_buf[0], BIN); 
       // Serial.print(controller_response_buf[1], BIN);
       // Serial.print(controller_response_buf[2], BIN);
