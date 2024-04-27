@@ -17,11 +17,16 @@
 *
 */
 
+//Assign pin 9 to the input pin to measure the command sent from the N64
+#define HF_PULSEIN_BITMASK CORE_PIN9_BITMASK
+
 uint32_t controller_response = 0x0;
 uint8_t controller_response_buf[4] = {0};
 
 uint16_t device_info = 0x0500;
+int duration[8];
 uint8_t joybus_command = 0;
+int command_pin = 9;//ultimately, we're just using this to get the port of this pin
 
 
 volatile int stop_flag = 0;
@@ -113,6 +118,42 @@ void disable_poll_counter(){
   GPIO7_DR_SET = data_pin;
 }
 
+//High Frequency pulse in
+//Returns the clock cycles between each pulse. Timeout returns 0. 
+//Good for pulses <1us
+unsigned long hf_pulseIn(int pin, unsigned long timeout)
+{
+
+    int bit = HF_PULSEIN_BITMASK;//NOTE: digitialPinToBitMask doesn't seem to work here
+    uint8_t port = digitalPinToPort(pin);
+    uint8_t stateMask = (HIGH ? bit : 0);
+    unsigned long width = 0; // keep initialization out of time critical area
+
+    // convert the timeout from microseconds to a number of times through
+    // the initial loop; it takes 16 clock cycles per iteration.
+    unsigned long numloops = 0;
+    unsigned long maxloops = microsecondsToClockCycles(timeout) / 16;
+
+    // wait for any previous pulse to end
+    while ((*portInputRegister(port) & bit) == stateMask)
+        if (numloops++ == maxloops)
+            return 1;
+
+    // wait for the pulse to start
+    while ((*portInputRegister(port) & bit) != stateMask)
+        if (numloops++ == maxloops)
+            return 2;
+
+    // wait for the pulse to stop
+    while ((*portInputRegister(port) & bit) == stateMask) {
+        if (numloops++ == maxloops)
+            return 3;
+        width++;
+    }
+    
+    return width; 
+}
+
 int master_count = 0;
 
 void setup() {
@@ -137,9 +178,9 @@ void setup() {
 void loop() {
 
   for(int i = 0; i <= 7; i++){
-    duration[i] = hf_pulseIn(poll_pin, 1000);
+    duration[i] = hf_pulseIn(command_pin, 1000);
     
-    if(duration[i] > 100)    joybus_command &= ~(1<<(7-i)); //greater than 2us? = 0
+    if(duration[i] > 240)    joybus_command &= ~(1<<(7-i)); //greater than 2us? = 0
     else if(duration[i] > 3) joybus_command |= (1<<(7-i));  //else = 1, greater than 3 means we didn't timeout
   }
 
