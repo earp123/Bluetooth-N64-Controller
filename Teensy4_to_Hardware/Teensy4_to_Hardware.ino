@@ -22,6 +22,8 @@
 uint32_t controller_response = 0x0;
 uint8_t controller_response_buf[4] = {0};
 
+uint16_t device_info = 0x0500;
+
 
 volatile int stop_flag = 0;
 volatile int poll = 0;
