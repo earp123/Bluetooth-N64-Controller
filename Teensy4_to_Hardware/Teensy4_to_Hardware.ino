@@ -35,6 +35,7 @@ volatile int poll = 0;
 //150MHz intervals for the comparator
 const uint32_t comp_4 = 600;//4us
 const uint32_t comp_3 = 407;//3us
+const uint32_t comp_2 = 248;
 const uint32_t comp_1 = 112; //1us
 
 //init buffer for status response (butons pressed)
@@ -313,7 +314,7 @@ void encode_byte_to_out_comp(uint32_t cntrllr_bytes, uint32_t out_B[])
     }
   }
   //Serial.println();
-  out_B[32] = comp_1;
+  out_B[32] = comp_2;
   
 }
 
