@@ -32,13 +32,15 @@ int command_pin = 9;//ultimately, we're just using this to get the port of this 
 volatile int stop_flag = 0;
 volatile int poll = 0;
 
-//150MHz intervals
+//150MHz intervals for the comparator
 const uint32_t comp_4 = 600;//4us
 const uint32_t comp_3 = 407;//3us
 const uint32_t comp_1 = 112; //1us
 
-//init buffer
+//init buffer for status response (butons pressed)
 uint32_t comp_vals[33];
+
+
 
 //response bit
 int res_bit = 0;
@@ -167,9 +169,8 @@ void setup() {
     poll_counter_init();
     config_timers();
 
-
+    pinMode(command_pin, INPUT_PULLUP);
     //enable_poll_counter();
-    
     
 }
 
@@ -177,37 +178,8 @@ void setup() {
 
 void loop() {
 
-  for(int i = 0; i <= 7; i++){
-    duration[i] = hf_pulseIn(command_pin, 1000);
-    
-    if(duration[i] > 240)    joybus_command &= ~(1<<(7-i)); //greater than 2us? = 0
-    else if(duration[i] > 3) joybus_command |= (1<<(7-i));  //else = 1, greater than 3 means we didn't timeout
-  }
+      if(Serial1.available()){
 
-  Serial.println(joybus_command, BIN);
-
-/*
-  if (poll){
-    
-      disable_poll_counter();
-    
-      //Clear the data pin
-      GPIO7_DR_SET = data_pin;
-      
-      GPT1_CR |= GPT_CR_EN;
-       //GPT2_CR |= GPT_CR_EN;
-      delayMicroseconds(200);//wait for the signal to go
-      //delay(5);
-
-      poll = 0;
-      enable_poll_counter();//enable for new poll
-      
-  }
-*/
-
-    if(Serial1.available()){
-
-      
       Serial1.readBytes((uint8_t *) controller_response_buf, 4);
       controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
                              ((uint32_t) controller_response_buf[1] << 16) |
@@ -225,6 +197,55 @@ void loop() {
       encode_byte_to_out_comp(controller_response, comp_vals);
       
     } 
+
+  for(int i = 0; i <= 7; i++){
+    duration[i] = hf_pulseIn(command_pin, 1000);
+    
+    if(duration[i] > 100)    joybus_command &= ~(1<<(7-i)); //greater than 2us? = 0
+    else if(duration[i] > 3) joybus_command |= (1<<(7-i));  //else = 1, greater than 3 means we didn't timeout
+    else return;//genius!  
+  }
+
+/* ~~~debugging the info command detection~~
+
+  Serial.print(duration[0]);Serial.print("  ");
+  Serial.print(duration[1]);Serial.print("  ");
+  Serial.print(duration[2]);Serial.print("  ");
+  Serial.print(duration[3]);Serial.print("  ");
+  Serial.print(duration[4]);Serial.print("  ");
+  Serial.print(duration[5]);Serial.print("  ");
+  Serial.print(duration[6]);Serial.print("  ");
+  Serial.println(duration[7]);
+  Serial.println(joybus_command, HEX);
+  if (joybus_command == 0) Serial.println("Info???");
+*/
+
+
+  if (joybus_command == 1){
+    
+      //disable_poll_counter();
+
+      delayMicroseconds(3);
+    
+      //Clear the data pin
+      GPIO7_DR_SET = data_pin;
+      
+      //SEND IT! triggers the pulses read from comp_vals
+      GPT1_CR |= GPT_CR_EN;
+      //GPT2_CR |= GPT_CR_EN; don't think we need to do this
+
+      delayMicroseconds(200);//wait for the signal to go
+
+      poll = 0;
+      //enable_poll_counter();
+      
+  }
+
+  else if (joybus_command == 0)
+  {
+    Serial.println("Got info request");
+  }
+
 }
 
 void encode_byte_to_out_comp(uint32_t cntrllr_bytes, uint32_t out_B[])
