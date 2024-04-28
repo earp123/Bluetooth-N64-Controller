@@ -23,7 +23,7 @@
 uint32_t controller_response = 0x0;
 uint8_t controller_response_buf[4] = {0};
 
-uint16_t device_info = 0x0500;
+uint32_t device_info = 0x05000000;
 int duration[8];
 uint8_t joybus_command = 0;
 int command_pin = 9;//ultimately, we're just using this to get the port of this pin
@@ -156,7 +156,27 @@ unsigned long hf_pulseIn(int pin, unsigned long timeout)
     return width; 
 }
 
-int master_count = 0;
+uint32_t flipFourBytes(uint32_t c){
+  uint32_t r=0;
+  for(uint32_t i = 0; i < 32; i++){
+    r <<= 1;
+    r |= c & 1;
+    c >>= 1;
+  }
+  return r;
+}
+
+byte flipByte(byte c){
+  char r=0;
+  for(byte i = 0; i < 8; i++){
+    r <<= 1;
+    r |= c & 1;
+    c >>= 1;
+  }
+  return r;
+}
+
+uint32_t device_info_flipped = flipFourBytes(device_info);
 
 void setup() {
 
@@ -169,10 +189,13 @@ void setup() {
     poll_counter_init();
     config_timers();
 
+    
+
     pinMode(command_pin, INPUT_PULLUP);
-    //enable_poll_counter();
     
 }
+
+
 
 
 
@@ -181,11 +204,25 @@ void loop() {
       if(Serial1.available()){
 
       Serial1.readBytes((uint8_t *) controller_response_buf, 4);
-      controller_response = (((uint32_t) controller_response_buf[0] << 24) | 
+
+      uint8_t flipped_byte = flipByte(controller_response_buf[0]);
+      controller_response_buf[0] = flipped_byte;
+
+      flipped_byte = flipByte(controller_response_buf[3]);
+      controller_response_buf[3] = flipped_byte;
+
+      flipped_byte = flipByte(controller_response_buf[2]);
+      controller_response_buf[2] = flipped_byte;
+
+      flipped_byte = flipByte(controller_response_buf[1]);
+      controller_response_buf[1] = flipped_byte;
+
+
+      controller_response = (((uint32_t) controller_response_buf[2] << 24) | 
                              ((uint32_t) controller_response_buf[1] << 16) |
-                             ((uint32_t) controller_response_buf[2] << 8)  |
+                             ((uint32_t) controller_response_buf[0] << 8)  |
                              ((uint32_t) controller_response_buf[3] ));
-                              //TODO might need to reverse the bits here
+                              
 
       // Serial.print(controller_response_buf[0], BIN); 
       // Serial.print(controller_response_buf[1], BIN);
@@ -235,15 +272,25 @@ void loop() {
       //GPT2_CR |= GPT_CR_EN; don't think we need to do this
 
       delayMicroseconds(200);//wait for the signal to go
-
-      poll = 0;
-      //enable_poll_counter();
       
   }
 
   else if (joybus_command == 0)
   {
-    Serial.println("Got info request");
+
+    //Serial.println("Got info request");
+    encode_byte_to_out_comp(device_info, comp_vals);
+
+    //Clear the data pin
+      GPIO7_DR_SET = data_pin;
+      
+      //SEND IT! triggers the pulses read from comp_vals
+      GPT1_CR |= GPT_CR_EN;
+
+      delayMicroseconds(200);//wait for the signal to go
+
+      Serial.println("Sent device info 0x0500"); // This might be too many bytes, joybus asks for 3, we're giving it 4
+
   }
 
 }
