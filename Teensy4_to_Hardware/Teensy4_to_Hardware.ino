@@ -13,7 +13,7 @@
 */
 
 /*TODO 
-* >write function that measures the joybus command such that we can respond with info or status
+* >the -x axis doens't work properly
 *
 */
 
