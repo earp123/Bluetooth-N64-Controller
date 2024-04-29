@@ -13,7 +13,7 @@
 */
 
 /*TODO 
-* >the -x axis doens't work properly
+* >whenever the signal has consecutive "1s", the 1us interval gets cut short to 500ish ns
 *
 */
 
@@ -270,7 +270,6 @@ void loop() {
       
       //SEND IT! triggers the pulses read from comp_vals
       GPT1_CR |= GPT_CR_EN;
-      //GPT2_CR |= GPT_CR_EN; don't think we need to do this
 
       delayMicroseconds(200);//wait for the signal to go
       
@@ -304,13 +303,13 @@ void encode_byte_to_out_comp(uint32_t cntrllr_bytes, uint32_t out_B[])
   for (int i = 0; i < 32; i++){
     if ((cntrllr_bytes >> i) & 1U){
       out_B[i] = comp_1;
-      // Serial.print(out_B[i], DEC);
-      // Serial.print(" ");
+      //  Serial.print(out_B[i], DEC);
+      //  Serial.print(" ");
     }
     else {
       out_B[i] = comp_3;
-      // Serial.print(out_B[i], DEC);
-      // Serial.print(" ");
+      //  Serial.print(out_B[i], DEC);
+      //  Serial.print(" ");
     }
   }
   //Serial.println();
