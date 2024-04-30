@@ -202,39 +202,39 @@ void setup() {
 
 void loop() {
 
-      if(Serial1.available()){
+  if(Serial1.available()){
 
-      Serial1.readBytes((uint8_t *) controller_response_buf, 4);
+    Serial1.readBytes((uint8_t *) controller_response_buf, 4);
 
-      uint8_t flipped_byte = flipByte(controller_response_buf[0]);
-      controller_response_buf[0] = flipped_byte;
+    uint8_t flipped_byte = flipByte(controller_response_buf[0]);
+    controller_response_buf[0] = flipped_byte;
 
-      flipped_byte = flipByte(controller_response_buf[3]);
-      controller_response_buf[3] = flipped_byte;
+    flipped_byte = flipByte(controller_response_buf[3]);
+    controller_response_buf[3] = flipped_byte;
 
-      flipped_byte = flipByte(controller_response_buf[2]);
-      controller_response_buf[2] = flipped_byte;
+    flipped_byte = flipByte(controller_response_buf[2]);
+    controller_response_buf[2] = flipped_byte;
 
-      flipped_byte = flipByte(controller_response_buf[1]);
-      controller_response_buf[1] = flipped_byte;
+    flipped_byte = flipByte(controller_response_buf[1]);
+    controller_response_buf[1] = flipped_byte;
 
 
-      controller_response = (((uint32_t) controller_response_buf[2] << 24) | 
-                             ((uint32_t) controller_response_buf[1] << 16) |
-                             ((uint32_t) controller_response_buf[0] << 8)  |
-                             ((uint32_t) controller_response_buf[3] ));
-                              
+    controller_response = (((uint32_t) controller_response_buf[2] << 24) | 
+                           ((uint32_t) controller_response_buf[1] << 16) |
+                           ((uint32_t) controller_response_buf[0] << 8)  |
+                           ((uint32_t) controller_response_buf[3] ));
+                            
 
-      // Serial.print(controller_response_buf[0], BIN); 
-      // Serial.print(controller_response_buf[1], BIN);
-      // Serial.print(controller_response_buf[2], BIN);
-      // Serial.print(controller_response_buf[3], BIN);
-      // Serial.println();
-      
-      //Serial.println(controller_response, BIN);
-      encode_byte_to_out_comp(controller_response, comp_vals);
-      
-    } 
+    // Serial.print(controller_response_buf[0], BIN); 
+    // Serial.print(controller_response_buf[1], BIN);
+    // Serial.print(controller_response_buf[2], BIN);
+    // Serial.print(controller_response_buf[3], BIN);
+    // Serial.println();
+    
+    //Serial.println(controller_response, BIN);
+    encode_byte_to_out_comp(controller_response, comp_vals);
+    
+  } 
 
   for(int i = 0; i <= 7; i++){
     duration[i] = hf_pulseIn(command_pin, 1000);
@@ -275,21 +275,21 @@ void loop() {
       
   }
 
-  else if (joybus_command == 0)
+  else if (joybus_command == 0 || joybus_command == 0xFF)
   {
 
     //Serial.println("Got info request");
     encode_byte_to_out_comp(device_info, comp_vals);
 
     //Clear the data pin
-      GPIO7_DR_SET = data_pin;
+    GPIO7_DR_SET = data_pin;
       
-      //SEND IT! triggers the pulses read from comp_vals
-      GPT1_CR |= GPT_CR_EN;
+    //SEND IT! triggers the pulses read from comp_vals
+    GPT1_CR |= GPT_CR_EN;
 
-      delayMicroseconds(200);//wait for the signal to go
+    delayMicroseconds(200);//wait for the signal to go
 
-      Serial.println("Sent device info 0x0500"); // This might be too many bytes, joybus asks for 3, we're giving it 4
+    Serial.println("Sent device info 0x0500"); // This might be too many bytes, joybus asks for 3, we're giving it 4
 
   }
 
