@@ -190,8 +190,6 @@ void setup() {
     poll_counter_init();
     config_timers();
 
-    
-
     pinMode(command_pin, INPUT_PULLUP);
     
 }
