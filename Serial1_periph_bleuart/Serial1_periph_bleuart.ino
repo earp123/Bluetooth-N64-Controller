@@ -118,7 +118,6 @@ void loop()
   {
 
     uint8_t buf[4];
-    //int count = Serial1.readBytes(buf, sizeof(buf));
     int count = Serial1.readBytes(buf, sizeof(buf));
 
     bleuart.write( buf, count);
