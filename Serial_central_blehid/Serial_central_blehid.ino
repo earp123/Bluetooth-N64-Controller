@@ -3,6 +3,8 @@
 
 BLEClientHidJoybus hid;
 
+uint8_t output_buffer[4]= {0};
+
 
 void setup()
 {
@@ -116,7 +118,9 @@ void loop()
 
 void joybus_report_callback(uint32_t* report)
 {
-  //TODO sort the bytes and send to Serial.
+  for(int i = 0; i < 4; i++) output_buffer[i]= (uint8_t) report[i];
+
+  Serial.write(output_buffer, 4);
 }
 
 
