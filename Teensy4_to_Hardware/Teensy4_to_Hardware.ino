@@ -7,7 +7,7 @@
 *   Manchester enocdes the buffer to pulse invertals as defined by Joybus,
 *   writes the pulses to the data pin TODO> upon receiving a poll rom the Nintendo 64 (on the same pin).
 *
-*   This sketch is uploaded to a Teensy 4.1 that is wired to a Bluetooth board in the CENTRAL role
+*   This sketch is uploaded to a Teensy 4 that is wired to a Bluetooth board in the CENTRAL role
 *   via hardware Serial1.
 *
 */
@@ -34,9 +34,9 @@ volatile int poll = 0;
 
 //150MHz intervals for the comparator
 const uint32_t comp_4 = 600;//4us
-const uint32_t comp_3 = 407;//3us
+const uint32_t comp_3 = 400;//3us
 const uint32_t comp_2 = 248;
-const uint32_t comp_1 = 112; //1us
+const uint32_t comp_1 = 114; //1us
 
 //init buffer for status response (butons pressed)
 uint32_t comp_vals[33];
@@ -217,10 +217,10 @@ void loop() {
     controller_response_buf[1] = flipped_byte;
 
 
-    controller_response = (((uint32_t) controller_response_buf[2] << 24) | 
-                           ((uint32_t) controller_response_buf[1] << 16) |
-                           ((uint32_t) controller_response_buf[0] << 8)  |
-                           ((uint32_t) controller_response_buf[3] ));
+    controller_response = (((uint32_t) controller_response_buf[3] << 24) | 
+                           ((uint32_t) controller_response_buf[2] << 16) |
+                           ((uint32_t) controller_response_buf[1] << 8)  |
+                           ((uint32_t) controller_response_buf[0] ));
                             
 
     // Serial.print(controller_response_buf[0], BIN); 
