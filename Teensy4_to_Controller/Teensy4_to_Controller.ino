@@ -122,7 +122,7 @@ void loop()
   Serial1.write((byte*) &cont_rsp, 4);
   //Serial.write((byte*) &cont_rsp, 4);
   //Serial.println(cont_rsp, BIN);
-  delay(10);
+  delay(2);
 
   
 }

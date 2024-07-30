@@ -8,7 +8,7 @@ uint8_t output_buffer[4]= {0};
 
 void setup()
 {
-  Serial.begin(1000000);
+  Serial.begin(115200);
 
   // Initialize Bluefruit with maximum connections as Peripheral = 0, Central = 1
   // SRAM usage required by SoftDevice will increase dramatically with number of connections
@@ -71,6 +71,7 @@ void connect_callback(uint16_t conn_handle)
   {
     // HID device mostly require pairing/bonding
     conn->requestPairing();
+    Serial.println("Connected...............");
   }else
   {    
     // disconnect since we couldn't find blehid service
@@ -112,7 +113,7 @@ void disconnect_callback(uint16_t conn_handle, uint8_t reason)
 
 void loop()
 {
-  
+  delay(1);
 }
 
 
@@ -120,7 +121,8 @@ void joybus_report_callback(uint32_t* report)
 {
   for(int i = 0; i < 4; i++) output_buffer[i]= (uint8_t) report[i];
 
-  Serial.write(output_buffer, 4);
+  //Serial.write(output_buffer, 4);
+  Serial.println("Message Rx");
 }
 
 

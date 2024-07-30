@@ -6,11 +6,13 @@
 BLEDis bledis;
 BLEHidJoybus blejoybus;
 
-uint8_t buf[4];
+uint8_t buf[4] = "aa";
 
 void setup()
 {
-  Serial.begin(1000000);
+  Serial.begin(115200);
+
+  Serial.println("Begin......................");
   
 
   Bluefruit.begin();
@@ -41,7 +43,7 @@ void startAdv(void)
 
 
   Bluefruit.Advertising.restartOnDisconnect(true);
-  Bluefruit.Advertising.setInterval(12, 12);    // in unit of 0.625 ms
+  Bluefruit.Advertising.setInterval(32, 244);    // in unit of 0.625 ms
   Bluefruit.Advertising.setFastTimeout(30);      // number of seconds in fast mode
   Bluefruit.Advertising.start(0);                // 0 = Don't stop advertising after n seconds
 }
@@ -50,8 +52,11 @@ void loop()
 {
   while(Serial.available()) 
   {
+    Serial.println("Got somethin.");
+    uint16_t conn_hdl = Bluefruit.connHandle();
     int count = Serial.readBytes(buf, sizeof(buf));
-    blejoybus.report(BLE_CONN_HANDLE_INVALID, (uint32_t *) buf);
+    blejoybus.report(conn_hdl, (uint32_t *) buf);
+    
   }
   
 }

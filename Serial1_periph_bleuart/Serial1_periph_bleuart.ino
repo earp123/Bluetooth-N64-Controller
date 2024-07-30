@@ -32,15 +32,13 @@ BLEDis  bledis;  // device information
 BLEUart bleuart; // uart over ble
 BLEBas  blebas;  // battery
 
+uint8_t buf[4];
+
 void setup()
 {
   Serial.begin(115200);
   Serial1.begin(1000000);
 
-#if CFG_DEBUG
-  // Blocking wait for connection when debug mode is enabled via IDE
-  while ( !Serial ) yield();
-#endif
   
   Serial.println("Bluefruit52 BLEUART Example");
   Serial.println("---------------------------\n");
@@ -116,8 +114,6 @@ void loop()
   // Forward data from HW Serial to BLEUART
   while (Serial1.available())
   {
-
-    uint8_t buf[4];
     int count = Serial1.readBytes(buf, sizeof(buf));
 
     bleuart.write( buf, count);
@@ -128,10 +124,7 @@ void loop()
     Serial.print(buf[1], BIN);
     Serial.println(buf[0], BIN);
     */
-
   }
-
-
 }
 
 // callback invoked when central connects
