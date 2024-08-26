@@ -1134,4 +1134,14 @@ zephyr_udc0: &usbd {
  status = "okay";
 };
 # 0 "<command-line>" 2
+# 1 "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/nrf52840dk_nrf52840.overlay" 1
+# 14 "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/nrf52840dk_nrf52840.overlay"
+arduino_serial: &uart1 {
+    status = "okay";
+    current-speed = <1000000>;
+    pinctrl-0 = <&uart1_default>;
+    pinctrl-1 = <&uart1_sleep>;
+    pinctrl-names = "default", "sleep";
+};
+# 0 "<command-line>" 2
 # 1 "C:/ncs/v2.3.0/zephyr/misc/empty_file.c"

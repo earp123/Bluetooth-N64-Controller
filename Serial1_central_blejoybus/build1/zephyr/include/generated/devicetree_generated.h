@@ -13304,8 +13304,8 @@
 #define DT_N_S_soc_S_uart_40028000_P_interrupts_EXISTS 1
 #define DT_N_S_soc_S_uart_40028000_P_disable_rx 0
 #define DT_N_S_soc_S_uart_40028000_P_disable_rx_EXISTS 1
-#define DT_N_S_soc_S_uart_40028000_P_current_speed 115200
-#define DT_N_S_soc_S_uart_40028000_P_current_speed_ENUM_IDX 12
+#define DT_N_S_soc_S_uart_40028000_P_current_speed 1000000
+#define DT_N_S_soc_S_uart_40028000_P_current_speed_ENUM_IDX 17
 #define DT_N_S_soc_S_uart_40028000_P_current_speed_EXISTS 1
 #define DT_N_S_soc_S_uart_40028000_P_rx_pull_up 0
 #define DT_N_S_soc_S_uart_40028000_P_rx_pull_up_EXISTS 1

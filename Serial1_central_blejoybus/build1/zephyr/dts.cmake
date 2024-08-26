@@ -672,7 +672,7 @@ set_target_properties(devicetree_target PROPERTIES "DT_NODELABEL|arduino_serial"
 set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|reg" "1073905664;4096;")
 set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|interrupts" "40;1;")
 set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|disable-rx" "False")
-set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|current-speed" "115200")
+set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|current-speed" "1000000")
 set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|rx-pull-up" "False")
 set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|cts-pull-up" "False")
 set_target_properties(devicetree_target PROPERTIES "DT_PROP|/soc/uart@40028000|hw-flow-control" "False")
