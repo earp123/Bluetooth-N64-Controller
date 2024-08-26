@@ -107,6 +107,7 @@ static void button_changed(uint32_t button_state, uint32_t has_changed)
 	if (has_changed & USER_BUTTON) {
 		uint32_t user_button_state = button_state & USER_BUTTON;
 		/* Send indication on a button press */
+		//TODO this is crashing on button press
 		err = joybus_send_button_state_indicate(user_button_state);
 		if(err){
 			LOG_ERR("Failed to send button indication (err: %d)", err);

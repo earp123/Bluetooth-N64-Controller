@@ -23,6 +23,8 @@
 #include <bluetooth/gatt_dm.h>
 #include <bluetooth/scan.h>
 
+#include <zephyr/drivers/uart.h>
+
 #include <dk_buttons_and_leds.h>
 
 #include "joybus_client.h"
@@ -38,11 +40,24 @@
 
 #define BT_LE_JOYBUS_CONN_PARAMS BT_LE_CONN_PARAM(0x08, 0x09, 0, 400)
 
+#define UART_TX_BUFF_SIZE 4
+
 #define WORKQ_THREAD_STACK_SIZE 1024
 #define WORKQ_PRIORITY 4
 
+static bool bt_connected = false;
+
 // Define stack area used by workqueue thread
 static K_THREAD_STACK_DEFINE(my_stack_area, WORKQ_THREAD_STACK_SIZE);
+
+// Define the message queue for BT to uart data
+K_MSGQ_DEFINE(uart_queue, sizeof(uint32_t), 1, 4);
+
+//UART1 named as uart throughout the code
+const struct device *uart= DEVICE_DT_GET(DT_NODELABEL(uart1));
+
+/*Define the receive buffer */
+static uint8_t tx_buf[UART_TX_BUFF_SIZE] = {0};
 
 // Define queue structure
 static struct k_work_q offload_work_q = {0};
@@ -168,6 +183,8 @@ static void discovery_completed_cb(struct bt_gatt_dm *dm,
 		/* Continue anyway */
 	}
 
+	bt_connected = true;
+
 
 	err = bt_gatt_dm_data_release(dm);
 	if (err) {
@@ -257,6 +274,8 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	bt_conn_unref(default_conn);
 	default_conn = NULL;
 
+	bt_connected = false;
+
 	/* This demo doesn't require active scan */
 	err = bt_scan_start(BT_SCAN_TYPE_SCAN_ACTIVE);
 	if (err) {
@@ -264,15 +283,12 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	}
 }
 
-static void on_le_param_req(struct bt_conn *conn, struct bt_le_conn_param *param)
-{
 
-}
 
 BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.connected = connected,
 	.disconnected = disconnected,
-	.le_param_req = on_le_param_req,
+	
 };
 
 static void scan_init(void)
@@ -304,14 +320,15 @@ static void scan_init(void)
 static void notify_input_rsp_cb(struct bt_joybus_client *joy,
 				    uint32_t input_response)
 {
-	char addr[BT_ADDR_LE_STR_LEN];
+	
+	uint32_t *rsp_p = &input_response;
 
-	bt_addr_le_to_str(bt_conn_get_dst(bt_joybus_conn(joy)),
-			  addr, sizeof(addr));
 	if (input_response == BT_INPUT_RESPONSE_VAL_INVALID) {
-		printk("[%s] Input Response notification aborted\n", addr);
+		printk("Input Response notification aborted\n");
+		
 	} else {
-		printk("[%s] Input Response notification: %x \n", addr, input_response);
+		printk("Input Response notification: %x \n", input_response);
+		k_msgq_put(&uart_queue, rsp_p, K_NO_WAIT);
 	}
 }
 
@@ -363,6 +380,7 @@ static void button_handler(uint32_t button_state, uint32_t has_changed)
 void main(void)
 {
 	int err;
+	uint8_t *rsp_tx_p = 0;
 
 	printk("Starting Bluetooth Central JOY example\n");
 
@@ -402,4 +420,13 @@ void main(void)
 	}
 
 	printk("Scanning successfully started\n");
+
+	while(1)
+	{
+		k_msgq_get(&uart_queue, rsp_tx_p, K_FOREVER);
+		while(bt_connected)
+		{
+			uart_tx(uart, rsp_tx_p, UART_TX_BUFF_SIZE, 100);
+		}
+	}
 }
