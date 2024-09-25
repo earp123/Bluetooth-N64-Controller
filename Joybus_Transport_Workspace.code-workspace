@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "Serial1_central_blejoybus"
+		},
+		{
+			"name": "Serial1_periph_blejoybus",
+			"path": "Serial1_periph_blejoybus"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"bas_client.h": "c",
+			"dk_buttons_and_leds.h": "c"
+		}
+	}
+}
