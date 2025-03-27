@@ -1,5 +1,5 @@
 # Bluetooth-N64-Controller
- Open Source files for plug-and-play devices that modify orginal Nintendo 64 contrlollers with Bluetooth capability.
+ Open Source files for a pair of Teensy 4s and a pair of Nordic SoCs that implement a custom [Joybus]([url](https://n64brew.dev/wiki/Joybus_Protocol)) driver and accompanying Bluetooth interface between a Nintendo 64 and its controller. This repository contains arduino code for the Teensys, arduino code for adafruit bluetooth kits using nordic BLE UART service, and additional C firmware for a custom Joybus Bluetooth service for a higher quality interface built on an NRF52840 DK from Nordic Semiconductor. 
 
  
-![image](https://github.com/earp123/Bluetooth-N64-Controller/assets/33456310/4bc9734b-e0e0-4b5d-b93f-11b489b9f3e5)
+
