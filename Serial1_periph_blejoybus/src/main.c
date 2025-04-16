@@ -15,7 +15,7 @@
 #include <zephyr/drivers/uart.h>
 #include "joybus.h"
 
-static struct bt_le_adv_param *adv_param = BT_LE_ADV_PARAM(
+static const struct bt_le_adv_param *adv_param = BT_LE_ADV_PARAM(
 	(BT_LE_ADV_OPT_CONNECTABLE |
 	 BT_LE_ADV_OPT_USE_IDENTITY), /* Connectable advertising and use identity address */
 	800, /* Min Advertising Interval 500ms (800*0.625ms) */
@@ -147,9 +147,9 @@ static void on_connected(struct bt_conn *conn, uint8_t conn_err)
 		return;
 	}
 
-	float connection_interval = info.le.interval * 1.25; // in ms
+	double connection_interval = info.le.interval * 1.25; // in ms
 	uint16_t supervision_timeout = info.le.timeout * 10; // in ms
-	printk("Connection parameters: interval %.2f ms, latency %d intervals, timeout %d ms",
+	printk("Connection parameters: interval %e ms, latency %d intervals, timeout %d ms",
 		connection_interval, info.le.latency, supervision_timeout);
 
 	update_phy(conn);

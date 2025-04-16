@@ -1,0 +1,7 @@
+default: Serial1_central_blejoybus
+build_dir: C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN
+domains:
+  - name: Serial1_central_blejoybus
+    build_dir: C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/Serial1_central_blejoybus
+flash_order:
+  - Serial1_central_blejoybus

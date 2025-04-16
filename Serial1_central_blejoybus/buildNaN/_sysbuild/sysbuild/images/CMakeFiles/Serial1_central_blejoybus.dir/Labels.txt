@@ -1,0 +1,13 @@
+# Target labels
+ Serial1_central_blejoybus
+# Source files and their labels
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/CMakeFiles/Serial1_central_blejoybus
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/CMakeFiles/Serial1_central_blejoybus.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/CMakeFiles/Serial1_central_blejoybus-complete.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-build.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-configure.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-download.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-install.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-mkdir.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-patch.rule
+C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-update.rule

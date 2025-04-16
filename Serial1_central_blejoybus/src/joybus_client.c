@@ -224,9 +224,10 @@ static void joybus_input_rsp_value_handler(struct k_work *work)
 {
 	int err;
 	struct bt_joybus_client *joy;
+    struct k_work_delayable *work_del = work;
 
-	joy = CONTAINER_OF(work, struct bt_joybus_client,
-			     input_rsp_periodic_read.read_work);
+	joy = CONTAINER_OF(work_del, struct bt_joybus_client,
+			           input_rsp_periodic_read.read_work);
 
 	if (!atomic_get(&joy->input_rsp_periodic_read.interval)) {
 		/* disabled */

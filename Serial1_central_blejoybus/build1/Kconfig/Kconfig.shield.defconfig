@@ -1,2 +1,0 @@
-osource "c:/users/ralls/github/bluetooth-n64-controller/serial1_periph_blejoybus/boards/shields/*/Kconfig.defconfig"
-osource "C:/ncs/v2.3.0/nrf/boards/shields/*/Kconfig.defconfig"

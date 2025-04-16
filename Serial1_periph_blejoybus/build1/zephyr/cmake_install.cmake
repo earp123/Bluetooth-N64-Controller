@@ -1,8 +1,8 @@
-# Install script for directory: C:/ncs/v2.3.0/zephyr
+# Install script for directory: C:/ncs/v2.9.1/zephyr
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/Zephyr-Kernel")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Zephyr-Kernel")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "MinSizeRel")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -34,7 +34,7 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/ncs/toolchains/v2.3.0/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-objdump.exe")
+  set(CMAKE_OBJDUMP "C:/ncs/toolchains/b620d30767/opt/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -49,7 +49,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/zephyr/soc/arm/cmake_install.cmake")
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/zephyr/soc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -70,11 +70,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/hostap/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -104,17 +99,22 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/memfault-firmware-sdk/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/cirrus-logic/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/openthread/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/suit-processor/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/memfault-firmware-sdk/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -129,7 +129,32 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/lz4/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nanopb/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/zscilib/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/cmsis/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/cmsis-dsp/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/cmsis-nn/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -144,12 +169,17 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/st/cmake_install.cmake")
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/hal_st/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/hal_wurthelektronik/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/hostap/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -179,22 +209,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/lz4/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/mipi-sys-t/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nanopb/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf_hw_models/cmake_install.cmake")
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf_wifi/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -214,17 +234,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/tinycbor/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/tinycrypt/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/TraceRecorder/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -239,12 +249,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/zscilib/cmake_install.cmake")
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrfxlib/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrfxlib/cmake_install.cmake")
+  include("C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf_hw_models/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

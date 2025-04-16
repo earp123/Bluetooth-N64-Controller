@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/CMakeFiles/hci_ipc_subimage"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/CMakeFiles/hci_ipc_subimage.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/CMakeFiles/hci_ipc_subimage-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-build.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-download.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-install.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_periph_blejoybus/build1/modules/nrf/samples/hci_ipc_subimage-prefix/src/hci_ipc_subimage-stamp/hci_ipc_subimage-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"hci_ipc_subimage"
+		],
+		"name" : "hci_ipc_subimage"
+	}
+}

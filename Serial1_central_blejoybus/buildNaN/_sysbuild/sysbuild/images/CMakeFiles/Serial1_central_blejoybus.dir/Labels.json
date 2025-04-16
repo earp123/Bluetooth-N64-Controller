@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/CMakeFiles/Serial1_central_blejoybus"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/CMakeFiles/Serial1_central_blejoybus.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/CMakeFiles/Serial1_central_blejoybus-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-build.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-download.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-install.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Serial1_central_blejoybus/buildNaN/_sysbuild/sysbuild/images/Serial1_central_blejoybus-prefix/src/Serial1_central_blejoybus-stamp/Serial1_central_blejoybus-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Serial1_central_blejoybus"
+		],
+		"name" : "Serial1_central_blejoybus"
+	}
+}
