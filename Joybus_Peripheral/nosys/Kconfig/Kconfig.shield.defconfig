@@ -1,0 +1,4 @@
+osource "c:/users/ralls/github/rarebit-flags-receivers/boards/shields/*/Kconfig.defconfig"
+osource "c:/ncs/v2.9.1/zephyr/boards/shields/*/Kconfig.defconfig"
+osource "c:/users/ralls/github/bluetooth-n64-controller/serial1_periph_blejoybus/boards/shields/*/Kconfig.defconfig"
+osource "C:/ncs/v2.9.1/nrf/boards/shields/*/Kconfig.defconfig"

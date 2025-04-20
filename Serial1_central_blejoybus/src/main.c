@@ -65,6 +65,8 @@ static struct k_work_q offload_work_q = {0};
 static struct bt_conn *default_conn;
 static struct bt_joybus_client joy;
 
+static uint32_t app_input_rsp = 0;
+
 static void notify_input_rsp_cb(struct bt_joybus_client *joy,
 				    uint32_t input_response);
 
@@ -321,15 +323,17 @@ static void notify_input_rsp_cb(struct bt_joybus_client *joy,
 				    uint32_t input_response)
 {
 	
-	uint32_t *rsp_p = &input_response;
+	// uint32_t *rsp_p = &input_response;
 
-	if (input_response == BT_INPUT_RESPONSE_VAL_INVALID) {
-		printk("Input Response notification aborted\n");
+	// if (input_response == BT_INPUT_RESPONSE_VAL_INVALID) {
+	// 	printk("Input Response notification aborted\n");
 		
-	} else {
-		printk("Input Response notification: %x \n", input_response);
-		k_msgq_put(&uart_queue, rsp_p, K_NO_WAIT);
-	}
+	// } else {
+	// 	printk("Input Response notification: %x \n", input_response);
+	// 	k_msgq_put(&uart_queue, rsp_p, K_NO_WAIT);
+	// }
+
+    app_input_rsp = input_response;
 }
 
 static void read_input_response_cb(struct bt_joybus_client *joy,
@@ -423,10 +427,12 @@ void main(void)
 
 	while(1)
 	{
-		k_msgq_get(&uart_queue, rsp_tx_p, K_FOREVER);
-		while(bt_connected)
-		{
-			uart_tx(uart, rsp_tx_p, UART_TX_BUFF_SIZE, 100);
-		}
+		// k_msgq_get(&uart_queue, rsp_tx_p, K_FOREVER);
+		// while(bt_connected)
+		// {
+		// 	uart_tx(uart, rsp_tx_p, UART_TX_BUFF_SIZE, 100);
+		// }
+        printk("CENTRAL: %x\n", app_input_rsp);
+        k_msleep(2);
 	}
 }

@@ -1,5 +1,5 @@
 # Generated file used for preloading a child image
-set(CMAKE_BUILD_TYPE "" CACHE INTERNAL "NCS child image controlled")
+set(CMAKE_BUILD_TYPE "MinSizeRel" CACHE INTERNAL "NCS child image controlled")
 set(CMAKE_VERBOSE_MAKEFILE "FALSE" CACHE INTERNAL "NCS child image controlled")
 set(BOARD_DIR "C:/ncs/v2.9.1/zephyr/boards/nordic/nrf5340dk" CACHE INTERNAL "NCS child image controlled")
 set(ZEPHYR_TOOLCHAIN_VARIANT "zephyr" CACHE INTERNAL "NCS child image controlled")

@@ -1,36 +1,3 @@
-/*
- * Copyright (c) 2022 - 2024, Nordic Semiconductor ASA
- * All rights reserved.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * 3. Neither the name of the copyright holder nor the names of its
- *    contributors may be used to endorse or promote products derived from this
- *    software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
 //#include <nrfx_example.h>
 #include <helpers/nrfx_gppi.h>
 #include <nrfx_timer.h>
@@ -46,25 +13,8 @@
 
 #include "joybus.h"
 
-#include <zephyr/types.h>
-#include <stddef.h>
-#include <inttypes.h>
-#include <errno.h>
-#include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
-#include <zephyr/settings/settings.h>
 
-
-/**
- * @defgroup nrfx_gppi_one_to_one_example One-to-one GPPI example
- * @{
- * @ingroup nrfx_gppi_examples
- *
- * @brief Example showing basic functionality of a nrfx_gppi helper.
- *
- * @details Application initializes nrfx_gpiote, nrfx_timer drivers and nrfx_gppi helper in a way that
- *          xx
- */
 
 /** @brief Symbol specifying timer instance to be used. */
 #define TIMER_INST_IDX 0
@@ -154,10 +104,6 @@ static void on_connected(struct bt_conn *conn, uint8_t conn_err)
 
 	bt_connected = true;
 
-  
-
-
-
 }
 
 void on_le_phy_updated(struct bt_conn *conn, struct bt_conn_le_phy_info *param)
@@ -177,8 +123,6 @@ static void on_disconnected(struct bt_conn *conn, uint8_t reason)
 	printk("Disconnected (reason %u)\n", reason);
 
 	bt_connected = false;
-
-    
 
 }
 
@@ -228,7 +172,7 @@ static void app_gpiote_init()
     
     status = nrfx_gpiote_init(&gpiote_inst, NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
     NRFX_ASSERT(status == NRFX_SUCCESS);
-    printk("GPIOTE status: %s",
+    printk("GPIOTE status: %s\n",
                    nrfx_gpiote_init_check(&gpiote_inst) ? "initialized" : "not initialized");
 
     status = nrfx_gpiote_channel_alloc(&gpiote_inst, &period_channel);
@@ -288,13 +232,13 @@ static void app_timer_init()
     status = nrfx_timer_init(&timer_inst, &timer_config, NULL);//SWR come back here for the timer handler to develop further
     if(status != NRFX_SUCCESS)
     {
-        printk("Error Timer Init No: %d", status);
+        printk("Error Timer Init No: %d\n", status);
         
         k_msleep(1000);
         return;
     }
     else
-        printk("Timer Initialized");
+        printk("Timer Initialized\n");
 
     nrfx_timer_clear(&timer_inst);
 }
@@ -328,20 +272,14 @@ static void app_gppi_setup()
 
     nrfx_gppi_channels_enable(BIT(gppi_channel_pw));
 
-    printk("GPPI channels setup and enabled");
+    printk("GPPI channels setup and enabled\n");
 }
 
 
-/**
- * @brief Function for application main entry.
- *
- * @return Nothing.
- */
 int main(void)
 {
     
-    printk("Starting nrfx_gppi pulse width sketch.");
-    k_msleep(1000);
+    printk("Starting nrfx_gppi pulse width sketch.\n");
 
     #if defined(__ZEPHYR__)
         IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_TIMER_INST_GET(TIMER_INST_IDX)), IRQ_PRIO_LOWEST,
@@ -349,6 +287,8 @@ int main(void)
         IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_GPIOTE_INST_GET(GPIOTE_INST_IDX)), IRQ_PRIO_LOWEST,
                     NRFX_GPIOTE_INST_HANDLER_GET(GPIOTE_INST_IDX), 0, 0);
     #endif
+
+    printk("Connected Interrupts.\n");
 
     //FAST AF BOOOII
     #if NRFX_CLOCK_ENABLED && (defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M)
@@ -365,7 +305,7 @@ int main(void)
  
     nrfx_timer_enable(&timer_inst);
     
-    printk("Timer status: %s", nrfx_timer_is_enabled(&timer_inst) ? "enabled" : "disabled");
+    printk("Timer status: %s\n", nrfx_timer_is_enabled(&timer_inst) ? "enabled" : "disabled");
     
 
     err = bt_enable(NULL);
@@ -373,57 +313,67 @@ int main(void)
 		printk("Bluetooth init failed (err %d)\n", err);
 		return -1;
 	}
-	bt_conn_cb_register(&connection_callbacks);
+
+	err = bt_conn_cb_register(&connection_callbacks);
+    if (err) {
+		printk("Bluetooth callbacks failed to register. (err %d)\n", err);
+		return -1;
+	}
 
 	err = joybus_init(&app_callbacks);
 	if (err) {
-		printk("Failed to init LBS (err:%d)\n", err);
+		printk("Failed to init Joybus (err:%d)\n", err);
 		return -1;
 	}
 	printk("Bluetooth initialized\n");
+    
+
 	err = bt_le_adv_start(adv_param, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
 	if (err) {
 		printk("Advertising failed to start (err %d)\n", err);
 		return -1;
 	}
 
+    printk("Started Advertising....\n");
+    k_msleep(1500);
+
+    printk("Enter Main Loop....\n");
+
+
+    while (1)
+    {
+
+        //TODO build the main loop out
+
+        //Generate Poll
+
+        //Start the pulse width timer
+
+        //wait for the gppi to build the controller response ~200uS
+
+        //send the controller response over BT
+
+        if(print_f)
+        {
+            printk("PERIPHERAL: %x\n", cont_resp);
+
+            if(bt_connected)
+            {
+                /* Send notification, the function sends notifications only if a client is subscribed */
+                err = joybus_send_input_response_notify(cont_resp);
+                if(err)
+                {
+                    printk("Error sending controller response. Err: %d\n", err);
+                }
+            }
+            
+            print_f = false;
+        }
+        k_msleep(2);
+
+    }
 
     return 0;
-
-
-    // while (1)
-    // {
-
-    //     //TODO build the main loop out
-
-    //     //Generate Poll
-
-    //     //Start the pulse width timer
-
-    //     //wait for the gppi to build the controller response ~200uS
-
-    //     //send the controller response over BT
-
-    //     if(print_f)
-    //     {
-    //         printk("Cont_resp: %x", cont_resp);
-
-    //         if(bt_connected)
-    //         {
-    //             /* Send notification, the function sends notifications only if a client is subscribed */
-    //             err = joybus_send_input_response_notify(cont_resp);
-    //             if(err)
-    //             {
-    //                 printk("Error sending controller response");
-    //             }
-    //         }
-            
-    //         print_f = false;
-    //     }
-
-    //     
-        
-    // }
 
 }
 
