@@ -1,0 +1,17 @@
+{
+	"folders": [
+        {
+            "path": "Joybus_Central"
+        },
+        {
+            "path": "Joybus_Peripheral"
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "bas_client.h": "c",
+            "dk_buttons_and_leds.h": "c"
+        },
+        "nrf-connect.applications": []
+    }
+}

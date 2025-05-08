@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/CMakeFiles/Joybus_Central"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/CMakeFiles/Joybus_Central.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/CMakeFiles/Joybus_Central-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-build.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-download.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-install.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/_sysbuild/sysbuild/images/Joybus_Central-prefix/src/Joybus_Central-stamp/Joybus_Central-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Joybus_Central"
+		],
+		"name" : "Joybus_Central"
+	}
+}

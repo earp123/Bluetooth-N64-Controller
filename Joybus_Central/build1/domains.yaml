@@ -1,0 +1,7 @@
+default: Joybus_Central
+build_dir: C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1
+domains:
+  - name: Joybus_Central
+    build_dir: C:/Users/ralls/GitHub/Bluetooth-N64-Controller/Joybus_Central/build1/Joybus_Central
+flash_order:
+  - Joybus_Central

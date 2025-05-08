@@ -1,0 +1,2 @@
+osource "C:/Users/ralls/GitHub/rareBit-Flags-Receivers/boards/shields/*/Kconfig.defconfig"
+osource "C:/ncs/v2.9.1/nrf/boards/shields/*/Kconfig.defconfig"
