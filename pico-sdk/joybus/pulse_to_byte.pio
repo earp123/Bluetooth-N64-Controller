@@ -1,0 +1,19 @@
+.program pulse_to_byte
+.wrap_target
+    pull block            ; to sync with only
+    wait 1 pin, 0         ; sync: wait for idle HIGH
+    set  y, 7             ; 8 data bits
+bit:
+    wait 0 pin, 0         ; falling edge → start of bit (LOW begins)
+    set  x, 6
+delay:
+    nop  [31]             ; ~32 cycles each
+    jmp  x--, delay       ; ~6 * 32 = ~192 cycles ≈ 1.536 us @125 MHz
+    in   pins, 1          ; sample once near mid-bit
+    wait 1 pin, 0         ; finish this bit on HIGH (re-sync)
+    jmp  y--, bit         ; next bit?
+
+    ; stop bit (~2us low + ~2us high): just consume it
+    wait 0 pin, 0
+    wait 1 pin, 0
+.wrap

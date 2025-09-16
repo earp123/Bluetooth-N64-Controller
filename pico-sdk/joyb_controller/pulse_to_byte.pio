@@ -1,0 +1,33 @@
+.program pulse_to_byte
+; Preload OSR with threshold_loops once via TX FIFO before enabling SM.
+
+    pull block                  ; OSR = threshold_loops (≈125 for 2us @125MHz)
+
+.wrap_target
+
+    wait 1 irq 7                  ; wait for the poll sm
+    set x, 31                   ; control for getting 32 bits
+    mov isr, null
+next_in:
+    wait 0 pin 0                ; falling edge -> start of pulse
+    mov  y, osr                 ; Y = threshold countdown
+
+count_loop:
+    jmp pin bit1                ; rose HIGH before threshold -> 1
+    jmp y-- count_loop          ; dec; jump while Y != 0
+    ; Y is still 0 after threshold -> 0
+    
+bit0:
+    set y, 0
+    wait 1 pin 0                ; only shift after returning HIGH
+    in  y, 1                    ; shift one bit (autopush packs 32)
+    jmp check                   ; go check if that was the last bit
+bit1:
+    set y, 1
+    in  y, 1
+check:
+    jmp x-- next_in                ; decrement, next bit if x!=0
+    ;this was the last bit
+    push
+
+.wrap

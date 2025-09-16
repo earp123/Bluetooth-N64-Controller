@@ -1,0 +1,35 @@
+//Outputs the input request poll
+
+.program joybus
+
+.wrap_target
+    pull block                  ;wait to get 0x01 from TX FIFO
+    set pindirs, 1              ; Ensure pin is output
+    set pins 1                  ;wait for line to go high
+
+next_bit:
+    out y, 1                   ; Get next bit into Y (not X!)
+    jmp !y bit_0               ; Jump if bit is "0"
+    ; the bit is "1"
+
+bit_1:
+    set pins, 0 [10]            ; set the GPIO to "0" 
+    set pins, 1 [27]            ; set the GPIO to "1"
+    jmp !osre next_bit          ; jump if the shift register contains more bits
+    ; shift register empty
+    jmp stop_bit
+
+bit_0:
+    set pins, 0 [30]            ; set the GPIO to "0"
+    set pins, 1 [6]             ; set the GPIO to "1" 
+    jmp !osre next_bit          ; jump if the shift register contains more bits
+    ; shift register empty
+
+stop_bit:
+    set pins, 0 [20]            ;low for 2us
+    set pins, 1 [20]            ;high
+    set pindirs, 0              ;flip pin to tri-state input
+    irq  7                ;trigger the input sm
+
+.wrap
+
