@@ -1,7 +1,2 @@
-## Raspberry Pi Pico tutorials
-
-This directory contains the projects used in my tutorial series on **[YouTube](https://www.youtube.com/c/SladorSoft)**.
-
-### The contents:
-
-- [PIO explained](https://youtu.be/3_fxE2XXgX8) - an example of using the PIO to drive the WS2812 neo pixels. It shows different approaches using as many as possible PIO instructions and features.
+## Controller-side Transmitter Application
+Two state machines are configured in this application. The first is used to drive an encoded poll signal out to the controller's data line, requesting the input state of the controller. The application must then switch the data pin direction to read the input response. The other state machine then measures the pulse widths of each of the 32 bits of response data that are mapped to the 15 buttons and two bytes for joystick X and Y  position. The 32 bit word is pushed to a FIFO and sent to btstack. 
